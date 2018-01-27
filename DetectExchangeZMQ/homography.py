@@ -143,5 +143,5 @@ while True:
 
     cv2.imshow("img3", cv2.resize(img3, (0, 0), fx = 0.5, fy = 0.5))
     #cv2.imwrite("output"+i+".png", img3)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(10) & 0xFF == ord('q'):
         break
