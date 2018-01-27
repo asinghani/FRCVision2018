@@ -1,11 +1,11 @@
 import numpy as np
 import cv2
 import time, math
-import zed_threaded as zed
+import zed
 
 img1 = cv2.imread('data/real_target2.png',0)
 cap = zed.ZEDWrapper()
-cap.start()
+#cap.start()
 #cap2 = cv2.VideoCapture(1)
 #cap2.set(3, 1280)
 #cap2.set(4, 720)
@@ -77,9 +77,9 @@ def rotationMatrixToEulerAngles(R):
 flann = cv2.FlannBasedMatcher(index_params, search_params)
 
 while True:
-    #left, right = cap.getFrame()
+    left, right = cap.getFrame()
     #ret, frame = cap2.read()
-    frame = cap.left
+    #frame = cap.left
     if frame == None:
         continue
 
