@@ -69,6 +69,8 @@ def rotationMatrixToEulerAngles(R):
 
     return np.array([x, y, z])
 
+flann = cv2.FlannBasedMatcher(index_params, search_params)
+
 while True:
     left, right = cap.getFrame()
 
@@ -79,7 +81,6 @@ while True:
     print("SIFT time: {}".format(current_milli_time() - t))
 
     t = current_milli_time()
-    flann = cv2.FlannBasedMatcher(index_params, search_params)
 
     # Remove np.asarray to use with SIFT
     #matches = flann.knnMatch(np.asarray(des1, np.float32),np.asarray(des2, np.float32),k=2)
