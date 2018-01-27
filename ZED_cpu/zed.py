@@ -18,5 +18,5 @@ if __name__ == "__main__":
     zed = ZEDWrapper()
     while True:
         left, right = zed.getFrame()
-        cv2.imshow("img", left)
+        cv2.imshow("img", right)
         cv2.waitKey(1)
