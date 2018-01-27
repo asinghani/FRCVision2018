@@ -24,7 +24,7 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 
 #sift = cv2.ORB_create()
-sift = cv2.xfeatures2d.SIFT_create()
+sift = cv2.xfeatures2d.SURF_create()
 
 t = current_milli_time()
 kp1 = sift.detect(img1,None)
