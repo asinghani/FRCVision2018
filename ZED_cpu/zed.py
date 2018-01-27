@@ -12,3 +12,11 @@ class ZEDWrapper:
     def getFrame(self):
         ret, frame = self.camera.read()
         left, right = numpy.vsplit(frame, 2)
+        return (left, right)
+
+if __name__ == "__main__":
+    zed = ZEDWrapper()
+    while True:
+        left, right = zed.getFrame()
+        cv2.imshow("img", left)
+        cv2.waitKey(1)
