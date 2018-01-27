@@ -19,7 +19,9 @@ import CameraStreamer.camera_stream as mjpg
 if __name__ == "__main__":
     zed = ZEDWrapper()
     stereo = cv2.StereoBM_create(numDisparities=16, blockSize=15)
+    server = mjpg()
     while True:
         left, right = zed.getFrame()
-        cv2.imshow("img", stereo.compute(cv2.cvtColor(left, cv2.COLOR_BGR2GRAY), cv2.cvtColor(right, cv2.COLOR_BGR2GRAY)))
+        server.putFrame(left)
+        cv2.imshow("img", left)
         cv2.waitKey(1)
