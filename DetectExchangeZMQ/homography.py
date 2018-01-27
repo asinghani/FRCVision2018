@@ -80,10 +80,10 @@ while True:
     left, right = cap.getFrame()
     #ret, frame = cap2.read()
     #frame = cap.left
-    if frame == None:
-        continue
+    #if frame == None:
+    #    continue
 
-    img2 = frame # cv2.undistort(frame, cameraMatrix, cameraDistortionCoefficients)
+    img2 = left # cv2.undistort(frame, cameraMatrix, cameraDistortionCoefficients)
 
     t = current_milli_time()
     kp2, des2 = sift.detectAndCompute(img2,None)
