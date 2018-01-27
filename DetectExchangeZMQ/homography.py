@@ -104,9 +104,9 @@ while True:
         h,w = img1.shape
         pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
         if M != None and  M.shape[0] != 0:
-	    dst = cv2.perspectiveTransform(pts,M)
+            dst = cv2.perspectiveTransform(pts,M)
         else:
-	    dst = []
+            dst = []
         img2 = cv2.polylines(img2,[np.int32(dst)],True,255,3, cv2.LINE_AA)
         #print(dst)
         try:
