@@ -19,5 +19,5 @@ if __name__ == "__main__":
     stereo = cv2.StereoBM_create(numDisparities=16, blockSize=15)
     while True:
         left, right = zed.getFrame()
-        cv2.imshow("img", stereo.compute(left, right))
+        cv2.imshow("img", stereo.compute(cv2.cvtColor(left, cv2.COLOR_BGR2GRAY), cv2.cvtColor(right, cv2.COLOR_BGR2GRAY)))
         cv2.waitKey(1)
