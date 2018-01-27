@@ -4,7 +4,7 @@ import time, math
 import zed
 
 img1 = cv2.imread('data/real_target2.png',0)
-cap = zed.ZEDWrapper(framerate = 10)
+cap = zed.ZEDWrapper(framerate = 30)
 
 cameraMatrix = np.array([np.array([1.15881320e+03, 0.00000000e+00, 6.34093244e+02]),
                          np.array([0.00000000e+00, 1.16120116e+03, 3.43339363e+02]),
