@@ -11,7 +11,7 @@ class ZEDWrapper:
 
     def getFrame(self):
         ret, frame = self.camera.read()
-        left, right = numpy.vsplit(frame, 2)
+        left, right = numpy.hsplit(frame, 2)
         return (left, right)
 
 if __name__ == "__main__":
