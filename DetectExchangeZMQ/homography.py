@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import time, math
-import ZED_cpu.zed as zed
+import zed
 
 img1 = cv2.imread('data/real_target2.png',0)
 cap = zed.ZEDWrapper()
