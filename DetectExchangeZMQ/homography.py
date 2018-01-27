@@ -4,7 +4,7 @@ import time, math
 import zed
 
 img1 = cv2.imread('data/real_target2.png',0)
-cap = zed.ZEDWrapper(resolution = (896, 504))
+cap = zed.ZEDWrapper(resolution = (960, 540), framerate = 10)
 #cap.start()
 #cap2 = cv2.VideoCapture(1)
 #cap2.set(3, 1280)
