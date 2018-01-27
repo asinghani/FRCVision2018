@@ -14,6 +14,8 @@ class ZEDWrapper:
         left, right = numpy.hsplit(frame, 2)
         return (left, right)
 
+
+import CameraStreamer.camera_stream as mjpg
 if __name__ == "__main__":
     zed = ZEDWrapper()
     stereo = cv2.StereoBM_create(numDisparities=16, blockSize=15)
