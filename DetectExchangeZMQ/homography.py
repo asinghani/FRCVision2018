@@ -80,6 +80,8 @@ while True:
     #left, right = cap.getFrame()
     #ret, frame = cap2.read()
     frame = cap.left
+    if frame == None:
+        continue
 
     img2 = frame # cv2.undistort(frame, cameraMatrix, cameraDistortionCoefficients)
 
