@@ -1,9 +1,10 @@
 import numpy as np
 import cv2
 import time, math
+import ZED_cpu.zed as zed
 
 img1 = cv2.imread('data/real_target2.png',0)
-cap = cv2.VideoCapture(0)
+cap = zed.ZEDWrapper()
 
 cameraMatrix = np.array([np.array([1.15881320e+03, 0.00000000e+00, 6.34093244e+02]),
                          np.array([0.00000000e+00, 1.16120116e+03, 3.43339363e+02]),
@@ -69,9 +70,9 @@ def rotationMatrixToEulerAngles(R):
     return np.array([x, y, z])
 
 while True:
-    ret, frame = cap.read()
+    left, right = cap.getFrame()
 
-    img2 = frame # cv2.undistort(frame, cameraMatrix, cameraDistortionCoefficients)
+    img2 = left # cv2.undistort(frame, cameraMatrix, cameraDistortionCoefficients)
 
     t = current_milli_time()
     kp2, des2 = sift.detectAndCompute(img2,None)
