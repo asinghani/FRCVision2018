@@ -1,14 +1,15 @@
 import numpy as np
 import cv2
 import time, math
-import zed
+import zed_threaded as zed
 
 img1 = cv2.imread('data/real_target2.png',0)
-#cap = zed.ZEDWrapper(framerate = 30)
-cap2 = cv2.VideoCapture(1)
-cap2.set(3, 1280)
-cap2.set(4, 720)
-cap2.set(5, 30)
+cap = zed.ZEDWrapper()
+cap.start()
+#cap2 = cv2.VideoCapture(1)
+#cap2.set(3, 1280)
+#cap2.set(4, 720)
+#cap2.set(5, 30)
 
 cameraMatrix = np.array([np.array([1.15881320e+03, 0.00000000e+00, 6.34093244e+02]),
                          np.array([0.00000000e+00, 1.16120116e+03, 3.43339363e+02]),
@@ -77,7 +78,8 @@ flann = cv2.FlannBasedMatcher(index_params, search_params)
 
 while True:
     #left, right = cap.getFrame()
-    ret, frame = cap2.read()
+    #ret, frame = cap2.read()
+    frame = cap.left
 
     img2 = frame # cv2.undistort(frame, cameraMatrix, cameraDistortionCoefficients)
 
