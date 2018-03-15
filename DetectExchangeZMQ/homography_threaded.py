@@ -135,9 +135,9 @@ while True:
         #print(dst)
         try:
             img2 = cv2.circle(img2, (dst[0][0][0], dst[0][0][1]), 30, (0, 255, 0), -1) # Top Left
-            img2 = cv2.circle(img2, (dst[1][0][0], dst[1][0][1]), 30, (0, 255, 0), -1) # Bottom Left
-            img2 = cv2.circle(img2, (dst[2][0][0], dst[2][0][1]), 30, (0, 255, 0), -1) # Bottom Right
-            img2 = cv2.circle(img2, (dst[3][0][0], dst[3][0][1]), 30, (0, 255, 0), -1) # Top Right
+            img2 = cv2.circle(img2, (dst[1][0][0], dst[1][0][1]), 30, (0, 255, 255), -1) # Bottom Left
+            img2 = cv2.circle(img2, (dst[2][0][0], dst[2][0][1]), 30, (0, 0, 255), -1) # Bottom Right
+            img2 = cv2.circle(img2, (dst[3][0][0], dst[3][0][1]), 30, (255, 255, 0), -1) # Top Right
 
             pnp = cv2.solvePnPRansac(objectPoints, dst, cameraMatrix, cameraDistortionCoefficients)
             print(pnp[1])
