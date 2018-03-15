@@ -33,7 +33,7 @@ if __name__ == '__main__':
     args, img_mask = getopt.getopt(sys.argv[1:], '', ['output=', 'square_size=', 'threads='])
     args = dict(args)
     args.setdefault('--output', './output/')
-    args.setdefault('--square_size', 1.0)
+    args.setdefault('--square_size', 2.0)
     args.setdefault('--threads', 4)
     if not img_mask:
         img_mask = './img*.jpg'  # default

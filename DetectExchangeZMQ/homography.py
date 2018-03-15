@@ -4,19 +4,19 @@ import time, math
 import zed
 
 img1 = cv2.imread('data/real_target2.png',0)
-cap = zed.ZEDWrapper(resolution = (960, 540), framerate = 10)
+#cap = zed.ZEDWrapper(resolution = (960, 540), framerate = 10)
 #cap.start()
-#cap2 = cv2.VideoCapture(1)
-#cap2.set(3, 1280)
-#cap2.set(4, 720)
-#cap2.set(5, 30)
+cap2 = cv2.VideoCapture(0)
+cap2.set(3, 1280)
+cap2.set(4, 720)
+cap2.set(5, 30)
 
-cameraMatrix = np.array([np.array([1.15881320e+03, 0.00000000e+00, 6.34093244e+02]),
-                         np.array([0.00000000e+00, 1.16120116e+03, 3.43339363e+02]),
+cameraMatrix = np.array([np.array([1.43134719e+03, 0.00000000e+00, 9.88360958e+02]),
+                         np.array([0.00000000e+00, 1.43704194e+03, 5.40208244e+02]),
                          np.array([0.00000000e+00, 0.00000000e+00, 1.00000000e+00])])
 
 cameraDistortionCoefficients = \
-    np.array([1.66981216e-01, -1.13963689e+00, 9.49829795e-04, 1.95607865e-04, 1.95684366e+00])
+    np.array([0.07022623, -0.31233022, -0.00558322, -0.00174155, 0.25068144])
 
 objectPoints = np.array([np.array([0.000, 4.375, 0.000]),
                          np.array([0.000, 0.000, 0.000]),
@@ -29,7 +29,7 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 
 #sift = cv2.ORB_create()
-sift = cv2.xfeatures2d.SURF_create()
+sift = cv2.xfeatures2d.SIFT_create()
 
 t = current_milli_time()
 kp1 = sift.detect(img1,None)
@@ -77,13 +77,13 @@ def rotationMatrixToEulerAngles(R):
 flann = cv2.FlannBasedMatcher(index_params, search_params)
 
 while True:
-    left, right = cap.getFrame()
-    #ret, frame = cap2.read()
+    #left, right = cap.getFrame()
+    ret, frame = cap2.read()
     #frame = cap.left
     #if frame == None:
     #    continue
 
-    img2 = left # cv2.undistort(frame, cameraMatrix, cameraDistortionCoefficients)
+    img2 = cv2.undistort(frame, cameraMatrix, cameraDistortionCoefficients)
 
     t = current_milli_time()
     kp2, des2 = sift.detectAndCompute(img2,None)
@@ -114,7 +114,8 @@ while True:
 
         h,w = img1.shape
         pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
-        if M != None and  M.shape[0] != 0:
+        print(M)
+        if (not (M is None)) and M.shape[0] != None:
             dst = cv2.perspectiveTransform(pts,M)
         else:
             dst = []

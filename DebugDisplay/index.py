@@ -1,13 +1,13 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 app = Flask("DebugDisplayServer")
 
 @app.route("/")
-def hello():
-    return "<button onclick=\"window.location = '/page2';\" style=\"font-size:50px\">Test 1</button>"
+def index():
+    return send_from_directory("static", "index.html")
 
-@app.route("/page2")
-def hello2():
-    return "<button onclick=\"window.location = '/';\" style=\"font-size:50px\">Test 2</button>"
+@app.route("/<path:path>")
+def send_static(path):
+    return send_from_directory("static", path)
 
 if __name__ == "__main__":
      app.run(host="0.0.0.0", port=8080)
