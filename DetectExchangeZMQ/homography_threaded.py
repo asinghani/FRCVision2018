@@ -1,16 +1,20 @@
 import numpy as np
 import cv2
 import time, math
-import zed
+from threadedstreamer import WebcamVideoStream
+from imutils.video import FPS
+import imutils
 
 img1 = cv2.imread('data/finaltarget.png',0)
 #cap = zed.ZEDWrapper(resolution = (960, 540), framerate = 10)
 #cap.start()
-cap2 = cv2.VideoCapture(0)
-cap2.set(3, 1280)
-cap2.set(4, 720)
-cap2.set(5, 30)
-cap2.set(cv2.CAP_PROP_FRAME_COUNT, 1)
+cap2 = WebcamVideoStream().start() #cv2.VideoCapture(0)
+#cap2.stream.set(3, 1280)
+#cap2.stream.set(4, 720)
+fps = FPS().start()
+
+#cap2.set(5, 30)
+#cap2.set(cv2.CAP_PROP_FRAME_COUNT, 1)
 
 cameraMatrix = np.array([np.array([1.43134719e+03 / 1.5, 0.00000000e+00, 9.88360958e+02 / 1.5]),
                          np.array([0.00000000e+00, 1.43704194e+03 / 1.5, 5.40208244e+02 / 1.5]),
@@ -86,7 +90,7 @@ flann = cv2.FlannBasedMatcher(index_params, search_params)
 
 while True:
     #left, right = cap.getFrame()
-    ret, frame = cap2.read()
+    frame = cap2.read()
     #frame = cap.left
     #if frame == None:
     #    continue
@@ -165,3 +169,5 @@ while True:
     #cv2.imwrite("output"+i+".png", img3)
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
+    #fps.update()
+    #print(fps.fps())
