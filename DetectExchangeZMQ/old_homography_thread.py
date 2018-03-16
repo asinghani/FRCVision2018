@@ -23,14 +23,14 @@ cameraMatrix = np.array([np.array([1.43134719e+03 / 1.5, 0.00000000e+00, 9.88360
 cameraDistortionCoefficients = \
     np.array([0.07022623, -0.31233022, -0.00558322, -0.00174155, 0.25068144])
 
-objectPoints = np.array([[0, 0, 0],
-                         [2.5, 0, 0],
-                         [5, 0, 0],
+objectPoints = np.array([[0.000, 9, 0.000],
+                         [0.000, 0.000, 0.000],
+                         [5, 0.000, 0.000],
+                         [5, 9, 0.000],
                          [0, 4.5, 0],
                          [5, 4.5, 0],
-                         [0, 9, 0],
-                         [2.5, 9, 0],
-                         [5, 9, 0]])
+                         [2.5, 0, 0],
+                         [2.5, 9, 0]])
 
 # [0, h/2], [w-1, h/2], [w/2, 0], [w/2, h-1 ]
 
@@ -129,13 +129,13 @@ while True:
         matchesMask = mask.ravel().tolist()
 
         h,w = img1.shape
-        pts = np.float32([[0,0],[w/2, 0],[w-1,0], [0, h/2], [w-1, h/2], [0,h-1],[w/2, h-1],[w-1,h-1]]).reshape(-1,1,2)
+        pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0], [0, h/2], [w-1, h/2], [w/2, 0], [w/2, h-1]]).reshape(-1,1,2)
         #print(M)
         if (not (M is None)) and M.shape[0] != None:
             dst = cv2.perspectiveTransform(pts,M)
         else:
             dst = []
-
+        
         img2 = cv2.polylines(img2,[np.int32(dst)],True,255,3, cv2.LINE_AA)
         #print(dst)
         try:
@@ -145,9 +145,9 @@ while True:
             print(dst)
             print(pnp[2])
             img2 = cv2.circle(img2, (int(dst[0][0][0]), int(dst[0][0][1])), 30, (0, 255, 0), -1) # Top Left
-            img2 = cv2.circle(img2, (int(dst[2][0][0]), int(dst[2][0][1])), 30, (0, 255, 255), -1) # Bottom Left
-            img2 = cv2.circle(img2, (int(dst[5][0][0]), int(dst[5][0][1])), 30, (0, 0, 255), -1) # Bottom Right
-            img2 = cv2.circle(img2, (int(dst[7][0][0]), int(dst[7][0][1])), 30, (255, 255, 0), -1) # Top Right
+            img2 = cv2.circle(img2, (int(dst[1][0][0]), int(dst[1][0][1])), 30, (0, 255, 255), -1) # Bottom Left
+            img2 = cv2.circle(img2, (int(dst[2][0][0]), int(dst[2][0][1])), 30, (0, 0, 255), -1) # Bottom Right
+            img2 = cv2.circle(img2, (int(dst[3][0][0]), int(dst[3][0][1])), 30, (255, 255, 0), -1) # Top Right
             print("c")
             print(roundArray(rotationMatrixToEulerAngles(pnp[1])))
             #eulerAngles = rotationMatrixToEulerAngles(cv2.Rodrigues(pnp[1]))
